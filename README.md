@@ -83,7 +83,7 @@ what's worth taking from <url>
 
 | Source | Works out of the box? |
 |---|---|
-| Article, blog, docs | yes (`WebFetch`) |
+| Article, blog, docs | yes |
 | GitHub repo | yes (page + README) |
 | Reddit, Hacker News | usually |
 | X/Twitter, LinkedIn, Instagram | often not (JS/login wall): paste the text, or use a connected browser MCP |
