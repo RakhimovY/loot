@@ -20,12 +20,14 @@ One job: kill the noise and hand back something you can act on.
 
 ## How to get the content (by link type)
 
+Use whatever your agent has. The tool names below are generic: map them to your runtime (Claude Code calls its fetcher `WebFetch`, other agents have an equivalent).
+
 | Link type | How | Works out of the box? |
 |---|---|---|
-| Article, blog, docs | `WebFetch` the URL | yes |
-| GitHub repo | `WebFetch` the repo page + the raw README; read what it does, stars, recent activity (use `gh` CLI if available) | yes |
-| Reddit, Hacker News | `WebFetch` | usually |
-| X/Twitter, LinkedIn, Instagram (JS or login-walled) | `WebFetch` often returns an empty shell | no, ask the user to paste the text, or use a connected browser MCP if one is available |
+| Article, blog, docs | fetch the URL with your agent's web-fetch tool | yes |
+| GitHub repo | fetch the repo page + the raw README (use the `gh` CLI if available); read what it does, stars, recent activity | yes |
+| Reddit, Hacker News | fetch the URL | usually |
+| X/Twitter, LinkedIn, Instagram (JS or login-walled) | a plain fetch often returns an empty shell | no, ask the user to paste the text, or use a connected browser tool/MCP if one is available |
 | YouTube or other video | no built-in transcript | ask the user to paste the transcript/captions, or use a transcript tool if one is available |
 
 Fetch in the current session. If a fetch returns less than ~200 chars, a login wall, or fails, say so plainly and ask the user to paste the content. Never invent what the source said.

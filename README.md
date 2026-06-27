@@ -2,7 +2,7 @@
 
 **Paste a link, get only what's worth taking.**
 
-`loot` is a skill for [Claude Code](https://claude.com/claude-code) and compatible agents. You give it a link (a tweet, a thread, an article, a GitHub repo, a Reddit/HN thread, a video), and it hands back a short, opinionated read: **what's worth taking**, with a concrete *before/after* case for each point, and **what to skip**. No summary. No retelling. Just a decision you can act on.
+`loot` is an [Agent Skill](https://agentskills.io). It works with Claude Code, Codex, Copilot CLI, Gemini CLI, and any other agent that supports the format. You give it a link (a tweet, a thread, an article, a GitHub repo, a Reddit/HN thread, a video), and it hands back a short, opinionated read: **what's worth taking**, with a concrete *before/after* case for each point, and **what to skip**. No summary. No retelling. Just a decision you can act on.
 
 ## Why
 
@@ -38,12 +38,16 @@ In one line: copy what already sells -> launch cheap -> watch where money shows 
 
 ## Install
 
-**Manual (works everywhere):**
+It's a standard Agent Skill (just `SKILL.md`), so it drops into any agent that reads the format. Clone the repo and copy the skill into your agent's skills directory:
 
 ```bash
 git clone https://github.com/RakhimovY/loot
-mkdir -p ~/.claude/skills
-cp -r loot/skills/loot ~/.claude/skills/loot
+
+# Claude Code:
+mkdir -p ~/.claude/skills && cp -r loot/skills/loot ~/.claude/skills/loot
+
+# Codex / Copilot CLI / Gemini CLI (shared cross-runtime path):
+mkdir -p ~/.agents/skills && cp -r loot/skills/loot ~/.agents/skills/loot
 ```
 
 Then start a new session and the skill is available.
