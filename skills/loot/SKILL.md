@@ -18,19 +18,21 @@ One job: kill the noise and hand back something you can act on.
 
 **When NOT to use:** they want a full, faithful summary of the source, or a deep archived write-up. This skill deliberately throws most of the source away.
 
-## How to get the content (by link type)
+## How to get the content (escalate, do not give up)
 
-Use whatever your agent has. The tool names below are generic: map them to your runtime (Claude Code calls its fetcher `WebFetch`, other agents have an equivalent).
+Your job is to actually read the source. Use the best tool you have, and if you lack the capability, **recommend the tool the user should add**, do not just refuse. A flat "paste it yourself" is the last resort, not the first answer.
 
-| Link type | How | Works out of the box? |
-|---|---|---|
-| Article, blog, docs | fetch the URL with your agent's web-fetch tool | yes |
-| GitHub repo | fetch the repo page + the raw README (use the `gh` CLI if available); read what it does, stars, recent activity | yes |
-| Reddit, Hacker News | fetch the URL | usually |
-| X/Twitter, LinkedIn, Instagram (JS or login-walled) | a plain fetch often returns an empty shell | no, ask the user to paste the text, or use a connected browser tool/MCP if one is available |
-| YouTube or other video | no built-in transcript | ask the user to paste the transcript/captions, or use a transcript tool if one is available |
+**1. Static pages** (article, blog, docs, GitHub repo, Reddit, Hacker News): fetch the URL with your agent's web-fetch tool. (Claude Code calls it `WebFetch`; other agents have an equivalent.) For a GitHub repo, also pull the raw README and note what it does, stars, and recent activity; use the `gh` CLI if available. This works out of the box.
 
-Fetch in the current session. If a fetch returns less than ~200 chars, a login wall, or fails, say so plainly and ask the user to paste the content. Never invent what the source said.
+**2. JS-heavy or login-walled pages** (X/Twitter, LinkedIn, Instagram, Threads): a plain fetch returns an empty shell, so this needs a real browser.
+- If you have a browser-automation tool or MCP connected, use it. One running with the user's logged-in session can read anything the user can see (needed for LinkedIn and most of X).
+- If you do not have one, do NOT stop at "paste it". Tell the user a browser tool is needed and recommend adding one: for example Playwright MCP (commonly run as `npx @playwright/mcp@latest`) for public pages, or a Chrome/browser MCP that reuses their logged-in session for login-walled sites. Then offer the paste fallback so they are unblocked right now.
+
+**3. Video** (YouTube and others): there is usually no built-in transcript.
+- If you have a transcript tool or MCP, use it.
+- If not, recommend installing one: for example `yt-dlp` (it can pull a video's captions/subtitles) or a YouTube-transcript MCP. Then offer to continue the moment they paste a transcript.
+
+Whatever path you take: if you could not actually read the source, say so plainly and **never invent what it said**. Recommending the right tool is part of the job; a refusal is not.
 
 ## The lens (what separates signal from noise)
 

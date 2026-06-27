@@ -81,15 +81,17 @@ what's worth taking from <url>
 
 ## What it can fetch
 
-| Source | Works out of the box? |
-|---|---|
-| Article, blog, docs | yes |
-| GitHub repo | yes (page + README) |
-| Reddit, Hacker News | usually |
-| X/Twitter, LinkedIn, Instagram | often not (JS/login wall): paste the text, or use a connected browser MCP |
-| YouTube / video | no built-in transcript: paste the captions, or use a transcript tool |
+Static pages work out of the box. For JS/login-walled sources and video, `loot` uses whatever capable tool your agent has, and if there is none it **recommends one to add** instead of giving up.
 
-If a fetch fails or returns a login wall, `loot` tells you and asks you to paste the content. It never invents what the source said.
+| Source | How |
+|---|---|
+| Article, blog, docs | web fetch, out of the box |
+| GitHub repo | web fetch (page + README), out of the box |
+| Reddit, Hacker News | web fetch, usually fine |
+| X/Twitter, LinkedIn, Instagram, Threads | needs a browser tool. With a browser MCP connected (e.g. Playwright MCP, or a logged-in Chrome MCP for login-walled sites) it reads them directly; without one it suggests adding it and offers a paste fallback |
+| YouTube / video | needs a transcript. With a transcript tool (e.g. `yt-dlp`) or a transcript MCP it reads captions; without one it suggests adding it and offers a paste fallback |
+
+`loot` never invents what a source said. If it truly cannot read something, it tells you and points you at the tool that would fix it.
 
 ## Output contract
 
